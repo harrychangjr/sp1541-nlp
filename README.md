@@ -1,5 +1,5 @@
 # sp1541-nlp
-NLP Project using past essays from SP1541: Exploring Science Communication through Popular Science
+NLP Project using past essays from SP1541: Exploring Science Communication through Popular Science in Academic Year 2020/21 Semester 1
 
 ## References
 
