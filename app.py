@@ -1,4 +1,13 @@
 import streamlit as st
+import backend
+import matplotlib as plt
+import seaborn as sns
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+from textstat import flesch_reading_ease, flesch_kincaid_grade
+from nltk.tokenize import sent_tokenize, word_tokenize
+import numpy as np
+import pandas as pd
 
 # Set page title
 st.set_page_config(page_title="SP1541-NLP - Harry Chang", page_icon = "desktop_computer", layout = "centered", initial_sidebar_state = "auto")
@@ -13,6 +22,44 @@ st.write("Current selection:", selected)
 
 if selected == "Overview":
     st.header("Overview")
+    st.markdown("""
+    For context, I took a module in Academic Year 2020/21 Semester 1 - SP1541: Exploring Science Communication in Popular Science, where I had to submit 2 news articles for grading.
+
+    The first article, titled *Timing vaccination campaign to reduce measles infections* - is related to my academic discipline, and revolves mainly around mathematics.
+    
+    The second article, titled *Investigating the relationship between culture and sweet-sour taste interactions* - is not related to my academic discipline, and is based on the science of chemistry.
+
+    Unfortunately, I scored below average for both articles, as I presumed that as a freshman back then, I did not undergo sufficient training to communicate complex scientific concepts well to the layman.
+
+    With the introduction of ChatGPT however, I took this opportunity to see if this AI tool could optimise my initial write-ups. The following articles/texts will hence be used for this analysis, as described below:   
+    """)
+    st.markdown("""
+    | Text_id  | Description                            |
+    |----------|----------------------------------------|
+    | 1a       | News Article 1 - Original              |
+    | 1b       | News Article 1 - Optimised (Min)       |
+    | 1c       | News Article 1 - Optimised (Max)       |
+    | 2a       | News Article 2 - Original              |
+    | 2b       | News Article 2 - Optimised (Min)       |
+    | 2c       | News Article 2 - Optimised (Max)       |
+    """)
+    st.markdown("")
+    st.markdown("""
+    For submission, the word limits of the 2 articles are 800 and 1000 respectively. For each article, 2 other variants were produced, namely:
+    - "b" series - using ChatGPT to summarise the original article with as few words as possible (~400 words)
+    - "c" series - using ChatGPT to stick to the original word limit(s), while enhancing the language of the articles
+
+    Using various libraries in Python including `matplotlib`, `seaborn`, `nltk`, `textstat` and `wordcloud`, we will hence perform detailed comparisons to evaluate if ChatGPT has indeed enhanced or reduced the quality of the original articles.
+
+    Three main methods will be used for this analysis:
+    1. Preliminary analysis - comparing word counts, readability scores and sentiment (compound) scores
+    2. Creating word clouds to identify most frequently used words from each article
+    3. Identifying top 10 words within each article series
+
+    The 'Detailed Walkthrough' section will show a summary of the results that were obtained.
+
+    Analysis performed by: [Harry Chang](https://linkedin.com/in/harrychangjr)
+    """)
 elif selected == "Articles":
     st.header("Articles")
     options = ["Text 1a: News Article 1 - Original", "Text 1b: News Article 1 - Optimised (Min)", "Text 1c: News Article 1 - Optimised (Max)",
@@ -206,7 +253,45 @@ elif selected == "Articles":
         
       
 elif selected == "Detailed Walkthrough":
-    st.header("Detailed Walkthrough")
+    st.subheader("Detailed Walkthrough")
+    check = ["Preliminary analysis", "Word clouds", "Identifying top 10 words within each article series"]
+    confirm = st.selectbox("Which part of the detailed walkthrough are you reading?", options = check)
+    st.write("Current selection:", confirm)
+    if confirm == "Preliminary analysis":
+        st.subheader("Preliminary analysis")
+        st.write("After loading the article variants as text files and the necessary packages from NLTK, we can then analyse these texts before summarising their respective scores in the dataframe below:")
+        st.write(backend.df)
+        st.write("Comparing word counts of all 6 article variants")
+        fig_a = backend.create_word_count_plot(backend.df)
+        st.pyplot(fig_a)
+        st.write("Comparing readability scores of all 6 article variants")
+        fig_b = backend.create_flesch_reading_ease_plot(backend.df)
+        st.pyplot(fig_b)
+        st.write("Comparing sentiment compound scores of all 6 article variants")
+        fig_c = backend.create_sentiment_compound_plot(backend.df)
+        st.pyplot(fig_c)
+    elif confirm == "Word clouds":
+        st.subheader("Word clouds")
+        texts = [backend.text1a, backend.text1b, backend.text1c, backend.text2a, backend.text2b, backend.text2c]
+        text_ids = ["text1a", "text1b", "text1c", "text2a", "text2b", "text2c"]
+
+        for text, text_id in zip(texts, text_ids):
+            fig = backend.generate_word_cloud(text, text_id)
+            st.pyplot(fig)
+    elif confirm == "Identifying top 10 words within each article series":
+        st.subheader("Identifying top 10 words within each article series")
+        st.set_option('deprecation.showPyplotGlobalUse', False)
+        # Display plots from backend.py
+        #st.header("Top 10 Words in Article Variants of News Article 1")
+        fig = backend.plot_top_proportions(backend.proportions_series_1, "Top 10 Words in Article Variants of News Article 1")
+        st.pyplot(fig)
+        #st.header("Top 10 Words in Article Variants of News Article 1")
+        fig2 = backend.plot_top_proportions(backend.proportions_series_2, "Top 10 Words in Article Variants of News Article 2")
+        st.pyplot(fig2)
+        #st.header("Top 10 Common Words Across Variants of Both Articles")
+        fig3 = backend.plot_top_proportions(backend.proportions_common, "Top 10 Common Words Across Variants of Both Articles")
+        st.pyplot(fig3)
+
 elif selected == "References":
     st.header("References")
     st.subheader("News Article 1 - Timing vaccination campaign to reduce measles infections")

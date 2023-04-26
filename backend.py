@@ -1,28 +1,29 @@
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
+import textstat
 from textstat import flesch_reading_ease, flesch_kincaid_grade
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 with open('txt files/SP1541 NA1 Original.txt', 'r', encoding='utf-8') as file:
     text1a = file.read()
 
-with open('txt files/SP1541 NA1 Optimised (Min).txt', 'r', encoding='utf-8') as file:
+with open('txt files/SP1541 NA1 Optimised Min.txt', 'r', encoding='utf-8') as file:
     text1b = file.read()
 
-with open('txt files/SP1541 NA1 Optimised (Max).txt', 'r', encoding='utf-8') as file:
+with open('txt files/SP1541 NA1 Optimised Max.txt', 'r', encoding='utf-8') as file:
     text1c = file.read()
 
 with open('txt files/SP1541 NA2 Original.txt', 'r', encoding='utf-8') as file:
     text2a = file.read()
 
-with open('txt files/SP1541 NA2 Optimised (Min).txt', 'r', encoding='utf-8') as file:
+with open('txt files/SP1541 NA2 Optimised Min.txt', 'r', encoding='utf-8') as file:
     text2b = file.read()
 
-with open('txt files/SP1541 NA2 Optimised (Max).txt', 'r', encoding='utf-8') as file:
+with open('txt files/SP1541 NA2 Optimised Max.txt', 'r', encoding='utf-8') as file:
     text2c = file.read()
 
 #test output
-print(text1)
+print(text1a)
 
 ## Preliminary analysis - word counts, readability scores, sentiment compound scores
 def analyze_text(text):
@@ -137,25 +138,28 @@ def show_values_on_bars(axs):
         _show_on_single_plot(axs)
 
 # Plot word_count
-g1 = sns.catplot(data=df, x='text_id', y='word_count', col='series', kind='bar', height=4, aspect=1.5)
-g1.set_titles(col_template="{col_name}")
-g1.set_xticklabels(rotation=45)
-show_values_on_bars(g1.axes)
-plt.show()
+def create_word_count_plot(df):
+    g1 = sns.catplot(data=df, x='text_id', y='word_count', col='series', kind='bar', height=4, aspect=1.5)
+    g1.set_titles(col_template="{col_name}")
+    g1.set_xticklabels(rotation=45)
+    show_values_on_bars(g1.axes)
+    return g1.fig
 
 # Plot flesch_reading_ease
-g2 = sns.catplot(data=df, x='text_id', y='flesch_reading_ease', col='series', kind='bar', height=4, aspect=1.5)
-g2.set_titles(col_template="{col_name}")
-g2.set_xticklabels(rotation=45)
-show_values_on_bars(g2.axes)
-plt.show()
+def create_flesch_reading_ease_plot(df):
+    g2 = sns.catplot(data=df, x='text_id', y='flesch_reading_ease', col='series', kind='bar', height=4, aspect=1.5)
+    g2.set_titles(col_template="{col_name}")
+    g2.set_xticklabels(rotation=45)
+    show_values_on_bars(g2.axes)
+    return g2.fig
 
-# Plot sentiment_compiund
-g3 = sns.catplot(data=df, x='text_id', y='sentiment_compound', col='series', kind='bar', height=4, aspect=1.5)
-g3.set_titles(col_template="{col_name}")
-g3.set_xticklabels(rotation=45)
-show_values_on_bars(g3.axes)
-plt.show()
+# Plot sentiment_compound
+def create_sentiment_compound_plot(df):
+    g3 = sns.catplot(data=df, x='text_id', y='sentiment_compound', col='series', kind='bar', height=4, aspect=1.5)
+    g3.set_titles(col_template="{col_name}")
+    g3.set_xticklabels(rotation=45)
+    show_values_on_bars(g3.axes)
+    return g3.fig
 
 ## Word clouds
 from wordcloud import WordCloud
@@ -237,3 +241,12 @@ def plot_top_proportions(proportions, title):
 
 plot_top_proportions(proportions_series_1, "Top 10 Words in Proportions Series 1")
 plot_top_proportions(proportions_series_2, "Top 10 Words in Proportions Series 2")
+
+def common_proportions(proportions_1, proportions_2):
+    common_words = set(proportions_1.keys()) & set(proportions_2.keys())
+    common_proportions = {word: (proportions_1[word] + proportions_2[word]) / 2 for word in common_words}
+    return common_proportions
+
+proportions_common = common_proportions(proportions_series_1, proportions_series_2)
+
+plot_top_proportions(proportions_common, "Top 10 Common Words Across Both Series")
