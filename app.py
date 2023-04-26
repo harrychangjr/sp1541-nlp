@@ -3,7 +3,7 @@ import streamlit as st
 # Set page title
 st.set_page_config(page_title="SP1541-NLP - Harry Chang", page_icon = "desktop_computer", layout = "centered", initial_sidebar_state = "auto")
 
-st.title("NLP Project using Science Communication Essays")
+st.title("NLP Project using Science News Articles")
 
 selected_options = ["Overview", "Articles", "Detailed Walkthrough", "References"]
 
@@ -15,11 +15,11 @@ if selected == "Overview":
     st.header("Overview")
 elif selected == "Articles":
     st.header("Articles")
-    options = ["News Article 1 - Original", "News Article 1 - Optimised (Min)", "News Article 1 - Optimised (Max)",
-            "News Article 2 - Original", "News Article 2 - Optimised (Min)", "News Article 2 - Optimised (Max)"]
+    options = ["Text 1a: News Article 1 - Original", "Text 1b: News Article 1 - Optimised (Min)", "Text 1c: News Article 1 - Optimised (Max)",
+            "Text 2a: News Article 2 - Original", "Text 2b: News Article 2 - Optimised (Min)", "Text 2c: News Article 2 - Optimised (Max)"]
     select = st.selectbox("Which article would you like to read?", options = options)
     st.write("Current selection:", select)
-    if select == "News Article 1 - Original":
+    if select == "Text 1a: News Article 1 - Original":
         st.subheader("Timing vaccination campaign to reduce measles infections")
         st.write("*Despite having a vaccine that is readily accessible, measles cases and deaths are still surging worldwide, especially in recent years. Why is this so and are there any long-term solutions to resolve this?*")
         st.write("By: Harry Chang (30 September 2020)")
@@ -50,7 +50,7 @@ elif selected == "Articles":
 
         It is indeed a tragedy to witness a sudden increase in cases and deaths from a disease that is easily preventable, especially in recent times. Therefore, it is crucial to ensure that even the poorest countries have access to these high-quality vaccination programmes. This would help prevent the unnecessary loss of lives to easily treatable diseases, including measles.
         """)       
-    elif select == "News Article 1 - Optimised (Min)":
+    elif select == "Text 1b: News Article 1 - Optimised (Min)":
         st.subheader("Optimizing Vaccination Campaign Timing to Reduce Measles Infections")
         st.write("By: ChatGPT (26 April 2023)")
         st.markdown("""
@@ -68,7 +68,7 @@ elif selected == "Articles":
 
         To prevent future outbreaks, countries must invest in high-quality immunization programs and disease surveillance. Ensuring access to high-quality vaccination programs in even the poorest countries is crucial to prevent unnecessary loss of lives to easily treatable diseases like measles.
         """)
-    elif select == "News Article 1 - Optimised (Max)":
+    elif select == "Text 1c: News Article 1 - Optimised (Max)":
         st.subheader("The Importance of Optimized Vaccination Campaign Timing in Reducing Measles Infections")
         st.write("By: ChatGPT (26 April 2023)")
         st.markdown("""
@@ -96,7 +96,7 @@ elif selected == "Articles":
 
         The recent measles outbreaks worldwide underscore the importance of optimizing vaccination campaign timing, as evidenced by the study conducted in Pakistan. By identifying the most effective time for vaccine distribution, countries can significantly reduce measles infections and save lives. However, optimizing vaccination campaign timing is just one aspect of a broader strategy to combat measles and other vaccine-preventable diseases. Continued investment in high-quality immunization programs, disease surveillance, and global cooperation is necessary to ensure that all children have access to life-saving vaccines and the opportunity to live healthy, productive lives.
         """)
-    elif select == "News Article 2 - Original":
+    elif select == "Text 2a: News Article 2 - Original":
         st.subheader("Investigating the relationship between culture and sweet-sour taste interactions")
         st.write("*Are we correct to stereotype taste perceptions and preferences based on different cultures?*")
         st.write("By: Harry Chang (31 October 2020)")
@@ -141,7 +141,7 @@ elif selected == "Articles":
 
         With this stereotype debunked, do we now expect people of different cultures to appreciate unique drinks such as sugarcane juice with lemon the same way? Only time and experience will tell. 
         """)
-    elif select == "News Article 2 - Optimised (Min)":
+    elif select == "Text 2b: News Article 2 - Optimised (Min)":
         st.subheader("Exploring the Connection Between Culture and Sweet-Sour Taste Interactions")
         st.write("*Debunking Stereotypes of Taste Perception and Preferences Across Cultures*")
         st.write("By: ChatGPT (26 April 2023)")
@@ -164,7 +164,7 @@ elif selected == "Articles":
 
         In conclusion, this research challenges stereotypes regarding taste perceptions and preferences across cultures. It remains to be seen how people from different backgrounds will appreciate unique drinks like sugarcane juice with lemon in the future.
         """)
-    elif select == "News Article 2 - Optimised (Max)":
+    elif select == "Text 2c: News Article 2 - Optimised (Max)":
         st.subheader("Investigating the Relationship Between Culture and Sweet-Sour Taste Interactions")
         st.write("*Examining Cultural Stereotypes in Taste Perceptions and Preferences*")
         st.write("By: ChatGPT (26 April 2023)")
@@ -200,7 +200,7 @@ elif selected == "Articles":
         Beverage manufacturers can benefit from this study by re-evaluating their product segmentation strategies to diversify their target consumer range. Instead of focusing on culture, companies may want to explore other variables such as age and gender.
 
         With cultural stereotypes surrounding taste perception debunked, will people from different cultures appreciate unique drinks, like sugarcane juice with lemon, in the same way? Only time and experience will tell. Further research is needed to understand individual differences in taste perception and interactions, as well as the factors contributing to these differences.
-        
+
         The study on sweet-sour taste interactions has shed light on the complex relationship between culture and taste perception. While it found that culture does influence taste interactions to some extent, it also revealed that individual differences play a crucial role. This research contributes valuable information to the understanding of taste perception and preferences and has practical applications in the beverage industry. However, more studies are needed to explore the nuances of taste perception further and to better understand the factors that contribute to individual differences in taste experiences.
         """)
         
