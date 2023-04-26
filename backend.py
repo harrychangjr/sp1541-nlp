@@ -121,28 +121,14 @@ g.add_legend()
 plt.show()
 
 import matplotlib.pyplot as plt
-import numpy as np
-
-def show_values_on_bars(axs):
-    def _show_on_single_plot(ax):
-        for p in ax.patches:
-            _x = p.get_x() + p.get_width() / 2
-            _y = p.get_y() + p.get_height()
-            value = '{:.2f}'.format(p.get_height())
-            ax.text(_x, _y, value, ha="center")
-
-    if isinstance(axs, np.ndarray):
-        for idx, ax in np.ndenumerate(axs):
-            _show_on_single_plot(ax)
-    else:
-        _show_on_single_plot(axs)
+#import numpy as np
 
 # Plot word_count
 def create_word_count_plot(df):
     g1 = sns.catplot(data=df, x='text_id', y='word_count', col='series', kind='bar', height=4, aspect=1.5)
     g1.set_titles(col_template="{col_name}")
     g1.set_xticklabels(rotation=45)
-    show_values_on_bars(g1.axes)
+    #show_values_on_bars(g1.axes)
     return g1.fig
 
 # Plot flesch_reading_ease
@@ -150,7 +136,7 @@ def create_flesch_reading_ease_plot(df):
     g2 = sns.catplot(data=df, x='text_id', y='flesch_reading_ease', col='series', kind='bar', height=4, aspect=1.5)
     g2.set_titles(col_template="{col_name}")
     g2.set_xticklabels(rotation=45)
-    show_values_on_bars(g2.axes)
+    #show_values_on_bars(g2.axes)
     return g2.fig
 
 # Plot sentiment_compound
@@ -158,7 +144,7 @@ def create_sentiment_compound_plot(df):
     g3 = sns.catplot(data=df, x='text_id', y='sentiment_compound', col='series', kind='bar', height=4, aspect=1.5)
     g3.set_titles(col_template="{col_name}")
     g3.set_xticklabels(rotation=45)
-    show_values_on_bars(g3.axes)
+    #show_values_on_bars(g3.axes)
     return g3.fig
 
 ## Word clouds
