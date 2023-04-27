@@ -1,5 +1,5 @@
 # sp1541-nlp
-NLP Project using past essays from SP1541: Exploring Science Communication through Popular Science in Academic Year 2020/21 Semester 1
+### NLP Project using past essays from SP1541: Exploring Science Communication through Popular Science in Academic Year 2020/21 Semester 1
 
 For context, I took a module in Academic Year 2020/21 Semester 1 - SP1541: Exploring Science Communication in Popular Science, where I had to submit 2 news articles for grading.
 
@@ -7,7 +7,7 @@ The first article, titled *Timing vaccination campaign to reduce measles infecti
     
 The second article, titled *Investigating the relationship between culture and sweet-sour taste interactions* - is not related to my academic discipline, and is based on the science of chemistry.
 
-Unfortunately, I scored below average for both articles, as I presumed that as a freshman back then, I did not undergo sufficient training to communicate complex scientific concepts well to the layman.
+Unfortunately, I scored below average for both articles, as I presumed that as a freshman back then, I did not undergo sufficient training to communicate complex scientific concepts well to the layman audience.
 
 With the introduction of ChatGPT however, I took this opportunity to see if this AI tool could optimise my initial write-ups. The following articles/texts will hence be used for this analysis, as described below:
 
@@ -22,7 +22,7 @@ With the introduction of ChatGPT however, I took this opportunity to see if this
 
 For submission, the word limits of the 2 articles are 800 and 1000 respectively. For each article, 2 other variants were produced, namely:
 - "b" series - using ChatGPT to summarise the original article with as few words as possible (~400 words)
-- "c" series - using ChatGPT to stick to the original word limit(s), while enhancing the language of the articles
+- "c" series - using ChatGPT to stick to the original word limit(s), while enhancing the language and expression of the article text where applicable
 
 Using various libraries in Python including `matplotlib`, `seaborn`, `nltk`, `textstat` and `wordcloud`, we will hence perform detailed comparisons to evaluate if ChatGPT has indeed enhanced or reduced the quality of the original articles.
 
@@ -30,6 +30,19 @@ Three main methods will be used for this analysis:
 1. Preliminary analysis - comparing word counts, readability scores and sentiment (compound) scores
 2. Creating word clouds to identify most frequently used words from each article
 3. Identifying top 10 words within each article series
+
+## Summary of results
+
+### Preliminary analysis
+Using ChatGPT in an attempt to optimise the original articles resulted in:
+- Decreased in Flesch reading scores (aka readability)
+- Slight increase or maintenance of sentiment compound scores (positive tone)
+
+### Top words used among each article series
+- Variants of News Article 1: `measles`, `vaccination`, `campaign`, `Pakistan`, `cases`, `infections`, `health`, `November`, `disease`, `children`
+- Variants of News Article 2: `taste`, `sweetness`, `sourness`, `sucrose`, `sensitivities`, `study`, `consumers`, `danish`, `acid`, `Chinese`
+- Across variants from both articles: `study`, `researchers`, `may`, `one`, `could`, `results`, `2019`
+
 ## References
 
 ### News Article 1
