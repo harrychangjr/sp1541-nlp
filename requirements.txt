@@ -1,7 +1,5 @@
 streamlit==1.21.0
 streamlit-option-menu==0.3.2
-streamlit-on-Hover-tabs==1.0.1
-st-on-hover-tabs
 Pillow==8.3.1
 numpy>=1.6.1
 nltk==3.6.1
