@@ -1,4 +1,5 @@
 import nltk
+nltk.download('vader_lexicon')
 from nltk.sentiment import SentimentIntensityAnalyzer
 import textstat
 from textstat import flesch_reading_ease, flesch_kincaid_grade
